@@ -13,11 +13,10 @@ def get_price():
     symbol = request.args.get('symbol', 'AAPL')
     start = request.args.get('start', '2023-01-01')
     end = request.args.get('end', '2023-12-31')
- 
-       try:
+    try:
         df = yf.download(symbol, start=start, end=end)
         if df.empty:
-        return f"找不到代號 {symbol} 的資料", 404
+            return f"找不到代號 {symbol} 的資料", 404
         df.reset_index(inplace=True)
         df['Date'] = df['Date'].astype(str)
         data = df[['Date', 'Open', 'High', 'Low', 'Close', 'Volume']].to_dict(orient='records')
