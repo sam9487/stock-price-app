@@ -22,19 +22,19 @@
         <p style="color:red;">錯誤：{{ error }}</p>
     {% endif %}
 
-    {% if stock_data %}
-        <h2>結果：{{ symbol }}（{{ start }} ~ {{ end }}）</h2>
-        <table border="1">
+   {% if stock_data %}
+    <h2>結果：{{ symbol }}（{{ start }} ~ {{ end }}）</h2>
+    <table border="1">
+        <tr>
+            <th>日期</th><th>開盤</th><th>最高</th><th>最低</th><th>收盤</th><th>成交量</th>
+        </tr>
+        {% for row in stock_data %}
             <tr>
-                <th>日期</th><th>開盤</th><th>最高</th><th>最低</th><th>收盤</th><th>成交量</th>
+                <td>{{ row['Date'] }}</td><td>{{ row['Open'] }}</td><td>{{ row['High'] }}</td>
+                <td>{{ row['Low'] }}</td><td>{{ row['Close'] }}</td><td>{{ row['Volume'] }}</td>
             </tr>
-            {% for row in stock_data %}
-                <tr>
-                    <td>{{ row.Date }}</td><td>{{ row.Open }}</td><td>{{ row.High }}</td>
-                    <td>{{ row.Low }}</td><td>{{ row.Close }}</td><td>{{ row.Volume }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-    {% endif %}
+        {% endfor %}
+    </table>
+{% endif %}
 </body>
 </html>
