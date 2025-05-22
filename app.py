@@ -19,8 +19,8 @@ def get_price():
             return f"找不到代號 {symbol} 的資料", 404
         df.reset_index(inplace=True)
         df['Date'] = df['Date'].astype(str)
-        data = df[['Date', 'Open', 'High', 'Low', 'Close', 'Volume']].to_dict(orient='records')
-        return render_template('index.html', stock_data=data, symbol=symbol, start=start, end=end)
+        stock_data = df.to_dict(orient="records")
+        return render_template('index.html', stock_data=stock_data, symbol=symbol, start=start, end=end)
     except Exception as e:
         return render_template('index.html', error=str(e))
         
